@@ -1,0 +1,130 @@
+
+show dbs
+
+use restaurants
+'switched to db restaurants'
+
+
+db.addresses.find()
+
+
+db.addresses.find(
+  {},
+  {restaurant_id: 1,borough: 1,cuisine: 1}
+)
+
+
+db.addresses.find(
+  {},
+  {restaurant_id: 1,borough: 1,cuisine: 1,_id: 0}
+)
+
+
+db.addresses.find(
+  {},
+  {restaurant_id: 1,borough: 1,'address.zipcode': 1,_id: 0}
+)
+
+
+db.addresses.find(
+  {borough: 'Bronx'}
+).limit(5)
+
+
+db.addresses.find(
+  {borough: 'Bronx'}
+)
+
+
+db.addresses.find(
+  {borough: 'Bronx'}
+).limit(5).skip(5)
+
+
+db.addresses.find(
+  {'grades.score': {$gt: 90}}
+)
+
+
+db.addresses.find(
+  {'address.coord': {$lt: -95.75}}
+)
+
+db.addresses.find(
+  {cuisine: {$ne: '-American'},'grades.score': {$gt: 70},'address.coord': {$lt: -65.75}}
+)
+
+db.addresses.find(
+  {cuisine: {$ne: '-American'},'grades.grade': 'A',borough: {$ne: 'Brooklyn'}}
+).sort {cuisine: -1}
+
+
+db.addresses.find(
+  {name: {$regex: '$wil',$options: '$i'}},
+  {restaurant_id: 1,name: 1,borough: 1,cuisine: 1}
+)
+
+db.addresses.find(
+  {name: {$regex: 'ces$',$options: '$i'}},
+  {restaurant_id: 1,name: 1,borough: 1,cuisine: 1}
+)
+
+db.addresses.find(
+  {name: {$regex: 'Reg',$options: '$i'}},
+  {restaurant_id: 1,name: 1,borough: 1,cuisine: 1}
+)
+
+db.addresses.find(
+  {borough: 'Bronx',$or: [{ cuisine: 'American'},{ cuisine: 'Chinese'}]}
+)
+
+db.addresses.find(
+  {$or: [{ borough: 'Staten Island'},{ borough: 'Queens'},{ borough: 'Bronx'},{ borough: 'Brooklyn'}]},
+  {restaurant_id: 1,name: 1,borough: 1,cuisine: 1}
+)
+
+db.addresses.find(
+  {$nor: [{ borough: 'Staten Island'},{ borough: 'Queens'},{ borough: 'Bronx'},{ borough: 'Brooklyn'}]},
+  {restaurant_id: 1,name: 1,borough: 1,cuisine: 1}
+)
+
+db.addresses.find(
+  {'grades.score': {$lte: 10}},
+  {restaurant_id: 1,name: 1,borough: 1,cuisine: 1}
+)
+
+
+db.addresses.find(
+  {$or: [{ $nor: [ { cuisine: 'American ' }, { cuisine: 'Chinese' } ]},{ name: RegExp('^Wil')}]},
+  {restaurant_id: 1,name: 1,borough: 1,cuisine: 1}
+)
+
+db.addresses.find(
+  {$and: [{ 'grades.grade': 'A'},{ 'grades.score': 9},{ 'grades.date': '2014-08-11T00:00:00.000+00:00'}]},
+  {restaurant_id: 1,name: 1,grades: 1}
+)
+
+
+db.addresses.find().sort{name : 1}
+
+db.addresses.find().sort{name : -1}
+
+db.addresses.find().sort{cuisine:1,  borough: -1}
+
+db.addresses.find(
+  {name: RegExp('mon')},
+  {name: 1,borough: 1,'address.coord': 1,cuisine: 1}
+)
+
+db.addresses.find(
+  {name: RegExp('^Mad')},
+  {name: 1,borough: 1,'address.coord': 1,cuisine: 1}
+)
+
+
+
+
+
+
+
+
