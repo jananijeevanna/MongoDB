@@ -52,3 +52,16 @@ db.movies.find( { $text: { $search: "bilbo -gandalf" } } )
 
 db.movies.find( { $text: { $search: "gold dragon" } } )
 
+db.movies.deleteOne({title:'Avatar'})
+db.movies.deleteOne({title:'Pee Wee Hermans's Big Adventure'})
+
+RELATIONSHIP
+
+db.users.find()
+db.posts.find()
+db.posts.aggregate([{"$match":{username:"GoodGuyGreg"}}])
+db.posts.aggregate([{"$match":{username:"ScumbagSteve"}}])
+db.comments.find()
+db.comments.aggregate([{"$match":{username:"GoodGuyGreg"}}])
+db.comments.aggregate([{"$match":{username:"ScumbagSteve"}}])
+db.comments.aggregate([{"$match":{post:"Reports a bug in your code"}}])
