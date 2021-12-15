@@ -1,0 +1,83 @@
+
+
+
+ASSIGNMENT 2
+
+count zipcode:
+
+[{$match: {
+ city: 'ATLANTA'
+}}, {$match: {
+ state: 'GA'
+}}, {$group: {
+ _id: '$city',
+ count: {
+  $sum: 1
+ }
+}}]
+
+To find population in Atlanta:
+ {
+    $group: {
+        _id: '$city',
+        totalPop: {
+            $sum: '$pop'
+        }
+    }
+
+To find pop by state
+
+{
+    _id: "$state",
+  totalPop: { $sum: "$pop" } 
+  
+}
+
+sort and limit
+
+[{
+    $group: {
+        _id: '$state',
+        totalPop: {
+            $sum: '$pop'
+        }
+    }
+}, {
+    $sort: {
+        pop: 1
+    }
+}, {
+    $limit: 3
+}]
+
+To group by state and city and sort in descending order
+
+[{$group: {
+ _id: {
+  state: '$state',
+  city: '$city'
+ },
+ pop: {
+  $sum: '$pop'
+ }
+}}, {$sort: {
+ pop: -1
+}}]
+
+To group by state and city and find avg population of each state
+
+[{$group: {
+ _id: {
+  state: '$state',
+  city: '$city'
+ },
+ pop: {
+  $sum: '$pop'
+ }
+}}, {$group: {
+ _id: '$_id.state',
+ avgCityPop: {
+  $avg: '$pop'
+ }
+}}]
+
